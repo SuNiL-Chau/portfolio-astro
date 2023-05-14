@@ -5,8 +5,8 @@ import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://sc-portfolio.netlify.app",
+  site: "https://sunilchaudhary.netlify.app",
   integrations: [sitemap()],
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
 });
