@@ -1,0 +1,51 @@
+$columnCount: 12;
+$gutterWidth: 30px;
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat($columnCount, 1fr);
+  grid-gap: $gutterWidth;
+}
+
+@for $i from 1 through $columnCount {
+  .col-#{$i} {
+    grid-column: span $i;
+  }
+
+  .offset-#{$i} {
+    margin-left: calc((#{$i} / #{$columnCount}) * 100%);
+  }
+}
+
+// Generate utility classes
+@each $prefix, $breakpoint in (
+  "xs": 575px,
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px
+) {
+  @for $i from 1 through $columnCount {
+    .#{$prefix}-col-#{$i} {
+      grid-column: span $i;
+    }
+
+    .#{$prefix}-offset-#{$i} {
+      margin-left: calc((#{$i} / #{$columnCount}) * 100%);
+    }
+  }
+
+  // Responsive utility classes
+  @media only screen and (min-width: $breakpoint) {
+    @for $i from 1 through $columnCount {
+      .#{$prefix}-col-#{$i} {
+        grid-column: span $i;
+      }
+
+      .#{$prefix}-offset-#{$i} {
+        margin-left: calc((#{$i} / #{$columnCount}) * 100%);
+      }
+    }
+  }
+}

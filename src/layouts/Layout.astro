@@ -1,4 +1,6 @@
 ---
+import "../styles/global.scss";
+
 export interface Props {
   title: string;
   description?: string;
@@ -35,8 +37,28 @@ const { title, description = "Sunil Chaudhary", image = "https://sunilchaudhary.
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- locomotive css & jd -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js"></script>
   </head>
   <body>
-    <slot />
+    <main data-scroll-container>
+      <slot />
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("running domload fpr loco");
+        const scroll = new LocomotiveScroll({
+          el: document.querySelector("[data-scroll-container]"),
+          smooth: true,
+        });
+      });
+    </script>
   </body>
 </html>
